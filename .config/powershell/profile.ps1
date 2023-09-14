@@ -67,5 +67,18 @@ if (Test-MyPath -Path $global:PROFILE.REMOTE) {
     Import-Module $PROFILE.REMOTE
 }
 
+if (Test-MyPath -Path './script/teach-class'){
+
+    # Training manual variables
+    $env:TOKEN_OWNER='rulasg'
+    # $env:TEACHER_PAT='' # We will inject this token through codespaces secrets
+    $env:INSTANCE_URL='api.github.com'
+    $env:ROOT_URL='github.com'
+    $env:CLASS_ORG='ps-developers-sandbox'
+} else {
+    $env:TEACHER_CLASS_ENV='./script/teach-class folder not found'
+}
+
+
 # Write-Host ("<< {0} ....... [{1}]" -f "PROFILE.CurrentUserAllHosts", $PROFILE.CurrentUserAllHosts ) -ForegroundColor DarkCyan
 Write-Information ("<< {0} ....... [{1}]" -f "PROFILE.CurrentUserAllHosts", $PROFILE.CurrentUserAllHosts )
