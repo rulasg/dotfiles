@@ -27,3 +27,10 @@ qq(){
 # Copilot CLI
 eval "$(github-copilot-cli alias -- "$0")"
 
+# Add variables for Training Manual repo allowing to create GitHub developers training repos
+export TOKEN_OWNER='rulasg'
+# export TEACHER_PAT='' # will inject thi token through codespace secrets
+export INSTANCE_URL='api.github.com'
+export ROOT_URL='github.com'
+export CLASS_ORG='ps-developers-sandbox'
+
