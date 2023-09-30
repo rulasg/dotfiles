@@ -51,6 +51,11 @@ if (Test-MyPath -Path $global:1dp) {
 
 # posh-git
 
+$poshgitModule = Get-Module -ListAvailable -Name posh-git
+if ($null -eq $poshgitModule) {
+  Install-Module -Name posh-git -Force
+}
+
 Import-Module posh-git
 
 $GitPromptSettings.DefaultPromptPrefix.Text = 'PS '
