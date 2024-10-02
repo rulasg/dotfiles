@@ -33,4 +33,4 @@ export TOKEN_OWNER='rulasg'
 export INSTANCE_URL='api.github.com'
 export ROOT_URL='github.com'
 export CLASS_ORG='ps-developers-sandbox'
-
+eval "$(/opt/homebrew/bin/brew shellenv)"
