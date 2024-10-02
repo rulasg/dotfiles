@@ -25,7 +25,7 @@ qq(){
 # [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # Copilot CLI
-eval "$(github-copilot-cli alias -- "$0")"
+# eval "$(github-copilot-cli alias -- "$0")"
 
 # Add variables for Training Manual repo allowing to create GitHub developers training repos
 export TOKEN_OWNER='rulasg'
