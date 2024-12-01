@@ -78,8 +78,8 @@ if (Test-MyPath -Path $global:AppleScripts) {
 
 Import-Module posh-git
 
-$GitPromptSettings.DefaultPromptPrefix.ForegroundColor ='yellow' 
-$GitPromptSettings.DefaultPromptPrefix.Text = '[$(Get-DevUserShortString)] '
+# $GitPromptSettings.DefaultPromptPrefix.ForegroundColor ='yellow' 
+# $GitPromptSettings.DefaultPromptPrefix.Text = '[$(Get-DevUserShortString)] '
 # $GitPromptSettings.DefaultPromptPrefix.Text = '[$(gh who)] '
 # $GitPromptSettings.DefaultPromptPrefix.Text = '[$(gh api user --jq ".login")] '
 # $GitPromptSettings.DefaultPromptPath =
@@ -96,7 +96,7 @@ if (Test-MyPath -Path $global:PROFILE.REMOTE) {
 }
 
 # Set development profile
-Restore-DevUser -WarningAction SilentlyContinue -InformationAction SilentlyContinue
+# Restore-DevUser -WarningAction SilentlyContinue -InformationAction SilentlyContinue
 
 # check if brew is installed
 if (Test-MyPath -Path "/opt/homebrew/bin/brew") {
