@@ -3,6 +3,9 @@
 if ($PROFILE.CurrentUserAllHosts -ne $PSCommandPath) { "Tracing not matching Sprint name" | Write-Error }
 Write-Information (">> {0} ....... [{1}]" -f "PROFILE.CurrentUserAllHosts", $PROFILE.CurrentUserAllHosts ) 
 
+# For commit signing
+$env:GPG_TTY = $(tty)
+
 #region Local_Paths
 
 $global:USERPROFILE = $HOME
@@ -75,18 +78,23 @@ if (Test-MyPath -Path $global:AppleScripts) {
 # function Prompt { "PS $($executionContext.SessionState.Path.CurrentLocation)`n$('>' * ($nestedPromptLevel + 1)) " }
 
 # posh-git
+# Check if posh-git is installed
+$poshGitModule = Get-Module -Name posh-git -ListAvailable
+if ( $poshGitModule) {
 
-Import-Module posh-git
-
-# $GitPromptSettings.DefaultPromptPrefix.ForegroundColor ='yellow' 
-# $GitPromptSettings.DefaultPromptPrefix.Text = '[$(Get-DevUserShortString)] '
-# $GitPromptSettings.DefaultPromptPrefix.Text = '[$(gh who)] '
-# $GitPromptSettings.DefaultPromptPrefix.Text = '[$(gh api user --jq ".login")] '
-# $GitPromptSettings.DefaultPromptPath =
-# $GitPromptSettings.DefaultPromptPath.ForegroundColor = 0xFFA500
-$GitPromptSettings.DefaultPromptPath.ForegroundColor = 'purple'
-$GitPromptSettings.DefaultPromptBeforeSuffix = '`n'
-$GitPromptSettings.DefaultPromptAbbreviateHomeDirectory = $false
+    
+    Import-Module posh-git
+    
+    # $GitPromptSettings.DefaultPromptPrefix.ForegroundColor ='yellow' 
+    # $GitPromptSettings.DefaultPromptPrefix.Text = '[$(Get-DevUserShortString)] '
+    # $GitPromptSettings.DefaultPromptPrefix.Text = '[$(gh who)] '
+    # $GitPromptSettings.DefaultPromptPrefix.Text = '[$(gh api user --jq ".login")] '
+    # $GitPromptSettings.DefaultPromptPath =
+    # $GitPromptSettings.DefaultPromptPath.ForegroundColor = 0xFFA500
+    $GitPromptSettings.DefaultPromptPath.ForegroundColor = 'purple'
+    $GitPromptSettings.DefaultPromptBeforeSuffix = '`n'
+    $GitPromptSettings.DefaultPromptAbbreviateHomeDirectory = $false
+}
 
 #endregion
 
@@ -111,5 +119,16 @@ if (Test-MyPath -Path "/opt/homebrew/bin/brew") {
         $(/opt/homebrew/bin/brew shellenv) | ForEach-Object{Invoke-Expression $_ }
     }
 }
+
+# DotNet tools
+$env:PATH += ":/Users/rulasg/.dotnet/tools"
+
+#Helpers parameters
+
+$global:SALES_PROJECT_NUMBER = 9279
+$global:SALES_PROJECT_OWNER = "github"
+$global:SALES_PROJECT_HOST = "github.com"
+$global:SALES_ISSUES_REPO = "semea-sales"
+$global:SALES_ISSUES_OWNER = "github"
 
 Write-Information ("<< {0} ....... [{1}]" -f "PROFILE.CurrentUserAllHosts", $PROFILE.CurrentUserAllHosts )
