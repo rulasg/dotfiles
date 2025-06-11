@@ -6,6 +6,43 @@ Write-Information (">> {0} ....... [{1}]" -f "PROFILE.CurrentUserAllHosts", $PRO
 # For commit signing
 $env:GPG_TTY = $(tty)
 
+#region functions
+function Import-MyModule{
+    [CmdletBinding()]
+    param (
+        [Parameter(Mandatory,ValueFromPipeline)][string]$Name,
+        [Parameter()][string]$Version,
+        [Parameter()][switch]$AllowPrerelease,
+        [Parameter()][switch]$PassThru
+    )
+
+    process{
+        if ($Version) {
+            $V = $Version.Split('-')
+            $semVer = $V[0]
+            $AllowPrerelease = ($AllowPrerelease -or ($null -ne $V[1]))
+        }
+
+        # Check if module is already installed. Use the version parameter transformation
+        $module = Import-Module -Name $Name -PassThru -ErrorAction SilentlyContinue -RequiredVersion:$semVer -Verbose
+
+        # If module not installed, install it
+        if ($null -eq $module) {
+            # Install module from PowershellGallery
+            $installed = Install-Module -Name $Name -Force -PassThru -AllowPrerelease:$AllowPrerelease  -RequiredVersion:$Version -Verbose
+            
+            # Now install the module that we have just installed
+            $module = Import-Module -Name $installed.Name -Force -PassThru -RequiredVersion ($installed.Version.Split('-')[0]) -Verbose
+        }
+
+        if ($PassThru) {
+            $module
+        }
+    }
+}
+
+#endregion
+
 #region Local_Paths
 
 $global:USERPROFILE = $HOME
