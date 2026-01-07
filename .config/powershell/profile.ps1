@@ -128,7 +128,7 @@ if ( $poshGitModule) {
     # $GitPromptSettings.DefaultPromptPrefix.Text = '[$(gh api user --jq ".login")] '
     # $GitPromptSettings.DefaultPromptPath =
     # $GitPromptSettings.DefaultPromptPath.ForegroundColor = 0xFFA500
-    $GitPromptSettings.DefaultPromptPath.ForegroundColor = 'purple'
+    $GitPromptSettings.DefaultPromptPath.ForegroundColor = 'orange'
     $GitPromptSettings.DefaultPromptBeforeSuffix = '`n'
     $GitPromptSettings.DefaultPromptAbbreviateHomeDirectory = $false
 }
