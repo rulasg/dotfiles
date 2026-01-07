@@ -58,6 +58,9 @@ $global:dotFilesrepo = $home | Join-Path -ChildPath $global:code -AdditionalChil
 $global:SecretsSessionKeyStore = "$Home/.secrets"
 $global:AppleScripts = '/Users/rulasg/Library/Mobile Documents/com~apple~ScriptEditor2/Documents'
 
+# Nuget
+$NUGET_PUBLISH = "~" | Join-Path -ChildPath ".nuget" -AdditionalChildPath "Publish"
+
 #Profile
 $PROFILE | Add-Member -NotePropertyName LocalProfilePath -NotePropertyValue ($PROFILE | Split-Path -Parent) -Force
 
@@ -119,7 +122,6 @@ if (Test-MyPath -Path $global:AppleScripts) {
 $poshGitModule = Get-Module -Name posh-git -ListAvailable
 if ( $poshGitModule) {
 
-    
     Import-Module posh-git
     
     # $GitPromptSettings.DefaultPromptPrefix.ForegroundColor ='yellow' 
@@ -162,10 +164,12 @@ $env:PATH += ":/Users/rulasg/.dotnet/tools"
 
 #Helpers parameters
 
-$global:SALES_PROJECT_NUMBER = 9279
-$global:SALES_PROJECT_OWNER = "github"
+$global:NOTES_ROOT = "/Users/rulasg/code/rulasg.notes"
+
+$global:NOTES_PROJECT_NUMBER = 9279
+$global:NOTES_PROJECT_OWNER = "github"
 $global:SALES_PROJECT_HOST = "github.com"
-$global:SALES_ISSUES_REPO = "semea-sales"
-$global:SALES_ISSUES_OWNER = "github"
+$global:SALES_ISSUES_REPO = "WRONG REPO DO NOT USE THIS ENVIRONMENT VARIABLE SALES_ISSUES_REPO"
+$global:SALES_ISSUES_OWNER = "WRONG OWNER DO NOT USE THIS ENVIRONMENT VARIABLE SALES_ISSUES_OWNER"
 
 Write-Information ("<< {0} ....... [{1}]" -f "PROFILE.CurrentUserAllHosts", $PROFILE.CurrentUserAllHosts )
